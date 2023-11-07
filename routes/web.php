@@ -17,7 +17,7 @@ use App\Http\Controllers\myController;
 */
 
 Route::get('/', function () {
-    $memes = Meme::where('statut', 1)->orderBy('updated_at', 'desc')->paginate(5);
+    $memes = Meme::where('statut', 1)->orderBy('updated_at', 'desc')->where('statut', 1)->paginate(5);
 
     return view('home', ['memes' => $memes]);
 })->name('home');
@@ -49,6 +49,8 @@ Route::get('/', function () {
 
     Route::get('/modifier-meme/{id}', [myController::class, 'updateMeme'])->name('updateMeme');
     Route::post('/modifier-meme/{id}', [myController::class, 'updateMemePost'])->name('updateMemePost');
+    Route::post('/deletePost/{id}', [myController::class, 'deletePost'])->name('deletePost');
+
 
     
 // });

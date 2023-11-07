@@ -43,7 +43,7 @@
                 <div class="d-flex justify-content-between flex-wrap">
                   <div>
                     <a href="{{ route('updateMeme', $meme->id) }}"><button class="btn btn-outline-primary">Modifier</button></a>
-                    <button id="{{ $meme->id }}" class="btn btn-outline-danger showDeleteMemeModal">Supprimer</button>
+                    <button value="{{ $meme->id }}" class="btn btn-outline-danger showDeleteMemeModal">Supprimer</button>
                   </div>
                 </div>
 
@@ -72,6 +72,27 @@
     </div>
   </section>
 
+  {{-- Modal de suppression du post --}}
+  <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deletePostModalLabel">DESACTIVATION DE L'ADMIN</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            Voulez-vous vraiment supprimer ce poste ? 
+            </div>
+            <form action="/deletePost/" id="disableUserForm" method="POST">
+                @csrf
+                <div class="modal-footer">
+                    <button type="submit" href="" class="btn btn-primary">Confirmer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+
 @endsection
 
 @section('script')
@@ -79,6 +100,8 @@
     $('.showDeleteMemeModal').on('click', function() {
 
       var val = $(this).val()
+
+      $('#disableUserForm').attr('action', '/deletePost/'+val)
       
       $('#deletePostModal').modal('show');
 

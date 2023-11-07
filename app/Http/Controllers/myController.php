@@ -117,7 +117,7 @@ class myController extends Controller
 
     public function adminHome(){
 
-        $memes = Meme::where('statut', 1)->orderBy('updated_at', 'desc')->paginate(5);
+        $memes = Meme::where('statut', 1)->orderBy('updated_at', 'desc')->where('statut', 1)->paginate(5);
 
         return view('admin.home', ['memes' => $memes]);
 
@@ -159,7 +159,7 @@ class myController extends Controller
 
     public function myPost(){
 
-        $memes = Meme::where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->paginate(5);
+        $memes = Meme::where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->where('statut', 1)->paginate(5);
 
         return view('admin.myPost', ['memes' => $memes]);
 
@@ -225,6 +225,20 @@ class myController extends Controller
         $success = "Modification éffectuée avec succès !";
 
         return redirect()->route('adminHome')->with('success', $success);
+    }
+
+    public function deletePost($id){
+
+        $meme = Meme::find($id);
+
+        $meme->update([
+            'statut' => "0"
+        ]);
+
+        $success = "Suppression éffectuée avec succès !";
+
+        return back()->with('success', $success);
+
     }
 
 }
