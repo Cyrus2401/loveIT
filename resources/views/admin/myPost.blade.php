@@ -34,10 +34,6 @@
                     <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">Publié par {{ $meme->user->pseudo }}</a></li>
                     <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{ $meme->created_at->format('d/m/Y') }}</time></a></li>
                   </ul>
-                  <ul class="mt-2">
-                    <li class="d-flex align-items-center"><a href="blog-single.html"><i class="bi bi-whatsapp"></i></a></li>
-                    <li class="d-flex align-items-center"><a href="blog-single.html"><i class="bi bi-facebook"></i></a></li>
-                  </ul>
                 </div>
 
                 <div class="d-flex justify-content-between flex-wrap">
