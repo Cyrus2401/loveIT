@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Meme;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\myController;
@@ -16,7 +17,9 @@ use App\Http\Controllers\myController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $memes = Meme::where('statut', 1)->orderBy('updated_at', 'desc')->paginate(5);
+
+    return view('home', ['memes' => $memes]);
 })->name('home');
 
 // Route::group(['middleware' => ['auth']], function() {
@@ -38,6 +41,14 @@ Route::get('/', function () {
     Route::get('/admin/admins-list', [myController::class, 'admins'])->name('admins');
     Route::post('/disableAdmin/{id}', [myController::class, 'disableAdmin'])->name('disableAdmin');
     Route::post('/ableAdmin/{id}', [myController::class, 'ableAdmin'])->name('ableAdmin');
+    
+    Route::get('/publier-meme', [myController::class, 'postMemeView'])->name('postMemeView');
+    Route::post('/publier-meme', [myController::class, 'postMeme'])->name('postMeme');
+    
+    Route::get('/mes-publications', [myController::class, 'myPost'])->name('myPost');
+
+    Route::get('/modifier-meme/{id}', [myController::class, 'updateMeme'])->name('updateMeme');
+    Route::post('/modifier-meme/{id}', [myController::class, 'updateMemePost'])->name('updateMemePost');
 
     
 // });

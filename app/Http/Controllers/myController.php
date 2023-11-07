@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Meme;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class myController extends Controller
 {
@@ -115,7 +117,9 @@ class myController extends Controller
 
     public function adminHome(){
 
-        return view('admin.home');
+        $memes = Meme::where('statut', 1)->orderBy('updated_at', 'desc')->paginate(5);
+
+        return view('admin.home', ['memes' => $memes]);
 
     }
 
@@ -151,6 +155,76 @@ class myController extends Controller
         
         return redirect()->route('admins')->with('success', $success);
 
+    }
+
+    public function myPost(){
+
+        $memes = Meme::where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->paginate(5);
+
+        return view('admin.myPost', ['memes' => $memes]);
+
+    }
+
+    public function postMemeView(){
+
+        return view('admin.postMeme');
+
+    }
+
+    public function postMeme(Request $request){
+
+        $title = $request->title;
+        $image = $request->file;
+
+        $validate = $request->validate([
+            'file' => 'required|mimes:png,jpeg,jpg,gif|max:2048'
+        ]);
+
+        $imagePath = $image->store('memes', 'public');
+
+        $postMeme = Meme::create([
+            'title' => $title,
+            'image' => $imagePath,
+            'user_id' => Auth::user()->id
+        ]);
+
+        $success = "Meme posté avec succès !";
+
+        return back()->with('success', $success);
+    }
+
+    public function updateMeme($id){
+        $meme = Meme::find($id);
+
+        return view('admin.updateMeme', ['meme' => $meme]);
+    }
+
+    public function updateMemePost(Request $request, $id){
+
+        $title = $request->title;
+        $image = $request->file;
+
+        $validate = $request->validate([
+            'file' => 'required|mimes:png,jpeg,jpg,gif|max:2048'
+        ]);
+
+        $imagePath = $image->store('memes', 'public');
+
+        $meme = Meme::find($id);
+
+        Storage::disk('public')->delete($meme->image);
+
+        $meme->update([
+
+            'title' => $title,
+            'image' => $imagePath,
+            'user_id' => Auth::user()->id
+
+        ]);
+ 
+        $success = "Modification éffectuée avec succès !";
+
+        return redirect()->route('adminHome')->with('success', $success);
     }
 
 }

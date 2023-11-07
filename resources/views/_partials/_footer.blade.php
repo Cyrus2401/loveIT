@@ -54,7 +54,7 @@
 
         <div class="me-md-auto">
             <div class="copyright">
-                &copy; <strong><span>J'aime l'informatique</span></strong> ~ 2020 / {{ date('Y') }}
+                &copy; <strong><span>J'aime l'informatique</span></strong> ~ 2023 / {{ date('Y') }}
             </div>
             <div class="credits">
                 <a href="#">Cyrus Jr</a>

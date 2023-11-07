@@ -8,8 +8,15 @@
         <ul>
           @auth
             <li><a class="nav-link scrollto" href="{{ route('adminHome') }}">Accueil</a></li>
-            <li><a class="nav-link scrollto" href="{{ route('admins') }}">Publier un même</a></li>
-            <li><a class="nav-link scrollto" href="{{ route('admins') }}">Liste des admins</a></li>
+
+            <li><a class="nav-link scrollto" href="{{ route('myPost') }}">Mes publications</a></li>
+
+            <li><a class="nav-link scrollto" href="{{ route('postMemeView') }}">Publier un même</a></li>
+
+            @if(Auth::user()->role == "sadmin")
+              <li><a class="nav-link scrollto" href="{{ route('admins') }}">Liste des admins</a></li>
+            @endif
+            
             <li><a type="submit" class="nav-link scrollto" href="{{ route('logout') }}">Déconnexion</a></li>
           @endauth
 
@@ -20,7 +27,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
 
-      @auth
+      @auth  
         <a href="{{ route('becomeAdmin') }}" class="get-started-btn scrollto">{{ Auth::user()->pseudo }}</a>
       @endauth
 

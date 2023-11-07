@@ -34,6 +34,8 @@
 
 </head>
 
+@yield('style')
+
 <body>
 
   @include('_partials._header')

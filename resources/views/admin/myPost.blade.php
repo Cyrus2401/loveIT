@@ -40,18 +40,12 @@
                   </ul>
                 </div>
 
-                @auth
-                  @if(Auth::user()->role == "sadmin")
-
-                    <div class="d-flex justify-content-between flex-wrap">
-                      <div>
-                        <a href="{{ route('updateMeme', $meme->id) }}"><button class="btn btn-outline-primary">Modifier</button></a>
-                        <button id="{{ $meme->id }}" class="btn btn-outline-danger showDeleteMemeModal">Supprimer</button>
-                      </div>
-                    </div>
-                    
-                  @endif
-                @endauth
+                <div class="d-flex justify-content-between flex-wrap">
+                  <div>
+                    <a href="{{ route('updateMeme', $meme->id) }}"><button class="btn btn-outline-primary">Modifier</button></a>
+                    <button id="{{ $meme->id }}" class="btn btn-outline-danger showDeleteMemeModal">Supprimer</button>
+                  </div>
+                </div>
 
               </article>
               
@@ -69,7 +63,7 @@
           
         @else
 
-          <div class="alert alert-info">Aucun mêmes n'a été posté !</div>
+          <div class="alert alert-info">Aucun mêmes n'a été posté par vous !</div>
           
         @endif
 
