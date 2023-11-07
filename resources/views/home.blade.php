@@ -37,7 +37,6 @@
 
                   <div>
                     <button value="{{ $meme->id }}" class="btn btn-outline-primary showDeleteMemeModal">Télécharger<a href="/storage/{{ $meme->image }}" download=""></a></button>
-
                   </div>
                 </div>
 
