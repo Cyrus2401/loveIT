@@ -54,10 +54,10 @@
 
         <div class="me-md-auto">
             <div class="copyright">
-                &copy; <strong><span>J'aime l'informatique</span></strong> ~ 2023 / {{ date('Y') }}
+                &copy; <strong><span>loveIT</span></strong> ~ 2023 / {{ date('Y') }}
             </div>
             <div class="credits">
-                <a href="#">Cyrus Jr</a>
+                <a href="https://www.linkedin.com/in/cyrus-hessou-b6a58122b/" target="_blank" class="fs-6">Cyrus Jr</a>
             </div>
         </div>
 

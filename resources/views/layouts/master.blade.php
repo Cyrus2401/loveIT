@@ -24,7 +24,7 @@
 
   <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
